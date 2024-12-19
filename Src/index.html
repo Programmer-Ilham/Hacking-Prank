@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacking Simulation</title>
+    <style>
+        body {
+            background: black;
+            display: flex;
+             
+            height: 100vh; 
+            margin: 0; 
+        }
+        .terminal {
+            background-color: black;
+            color: green;
+            padding: 10px;
+            font-family: monospace;
+            white-space: pre-wrap; 
+            height: 200px;
+            width: 400px; 
+            overflow-y: auto; 
+        }
+
+        .blinking {
+            animation: blink 1s step-start infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal"></div>
+    <script>
+        let term = document.querySelector(".terminal");
+
+function getRandomDelay(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min; // Random delay between min and max
+}
+
+function hack(msgs) {
+    return new Promise((resolve) => {
+        const delay = getRandomDelay(1000, 3000); // Random delay between 1000ms and 3000ms
+        setTimeout(() => {
+     // Create a span for the message and a span for the blinking dots
+            const message = document.createElement('span');
+            message.textContent = msgs;
+
+            const dots = document.createElement('span');
+            dots.className = 'blinking'; // Add blinking class
+            dots.textContent = '...'; // Dots to blink
+
+           
+            message.appendChild(dots);
+            term.appendChild(message);
+            term.appendChild(document.createElement('br')); // Add a line break
+
+            resolve("Success");
+        }, delay); // Use the random delay
+    });
+}
+
+async function hackMsgs() {
+    await hack("Initializing Hacking");
+    await hack("Reading Your Files");
+    await hack("Sending all files and Password to the server");
+    await hack("Cleaning Up");
+
+    // Simulate error messages
+    for (let i = 1;i <= 100; i++) {
+        await hack(`Error ${i}: Something went wrong!`);
+    for (let i = 1;i <= 100; i++) {
+        alert("Your Device is Hacked")
+    }
+    }
+}
+
+
+hackMsgs();
+    </script>
+</body>
+</html>
+
